@@ -23,12 +23,15 @@ jobs:
       - name: Build do projeto
         run: npm run build
 
-      - name: Criar chave SSH
+      - name: Criar chave SSH e testar conexão
         run: |
           mkdir -p ~/.ssh
           echo -e "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
+
+          echo "🔍 Testando conexão SSH..."
+          ssh -v -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} exit
 
       - name: Copiar arquivos via SCP
         run: |
