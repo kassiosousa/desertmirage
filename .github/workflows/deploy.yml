@@ -1,4 +1,4 @@
-name: Deploy Vite App
+name: build-and-deploy
 
 on:
   push:
@@ -19,12 +19,13 @@ jobs:
       - name: Build do projeto
         run: npm run build
 
-      - name: Copiar arquivos via SSH
-        uses: appleboy/scp-action@v0.1.6
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "dist/*"
-          target: ${{ secrets.REMOTE_PATH }}
-          strip_components: 1
+      - name: Criar chave SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Copiar arquivos via SCP
+        run: |
+          scp -r dist/* ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}
