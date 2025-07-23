@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Testar valor de DEPLOY_HOST
         run: |
-          echo "Host: ${{ secrets.DEPLOY_HOST }}"
+          echo -e "Host: ${{ secrets.DEPLOY_HOST }}"
 
       - name: Checkout do código
         uses: actions/checkout@v3
@@ -26,7 +26,7 @@ jobs:
       - name: Criar chave SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          echo -e "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
 
