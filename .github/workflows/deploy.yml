@@ -1,33 +1,30 @@
-name: Deploy Vite React App to GitHub Pages
+name: Deploy Vite App
 
 on:
   push:
     branches:
       - master
 
-permissions:
-  contents: write
-
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout do código
         uses: actions/checkout@v3
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Build do projeto
+        run: npm run build
+
+      - name: Copiar arquivos via SSH
+        uses: appleboy/scp-action@v0.1.6
         with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Build
-        run: yarn build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "dist/*"
+          target: ${{ secrets.REMOTE_PATH }}
+          strip_components: 1
