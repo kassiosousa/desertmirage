@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Testar valor de DEPLOY_HOST
+        run: |
+          echo "Host: ${{ secrets.DEPLOY_HOST }}"
+
       - name: Checkout do código
         uses: actions/checkout@v3
 
