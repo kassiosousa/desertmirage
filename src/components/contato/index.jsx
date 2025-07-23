@@ -10,7 +10,7 @@ export default function Contato() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const res = await fetch("https://kassiosousa.com.br/email-service/send-email", {
+    const res = await fetch("https://email.kassiosousa.com.br/send-email", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
