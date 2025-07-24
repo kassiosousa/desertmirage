@@ -1,3 +1,5 @@
+import bg from '../../assets/bg-banner.png';
+
 export default function Servicos() {
   const servicos = [
     { icon: '🗳️', nome: 'Pesquisa eleitoral e avaliação administrativa', desc: 'Levantamento de dados confiáveis para identificar a intenção de voto, percepção do eleitorado e desempenho de gestões públicas, auxiliando decisões estratégicas com base em evidências reais.' },
@@ -11,29 +13,35 @@ export default function Servicos() {
   const secondRow = servicos.slice(3)
 
   return (
-    <section id="servicos" className="py-16 bg-gray-50 px-4">
-      <h2 className="text-2xl font-bold text-center mb-8">SERVIÇOS</h2>
+    <section id="servicos" 
+      className="relative bg-cover bg-center py-16 bg-gray-50 px-4 overflow-hidden"
+      style={{ backgroundImage: `url(${bg})` }}
+    >
+      <div className="absolute inset-0 h-full w-full bg-white/90 z-0 pointer-events-none"></div>
+      <div className="relative z-8 overflow-hidden">
+        <h2 className="text-3xl font-bold text-center mb-8">SERVIÇOS</h2>
 
-      {/* Primeira linha com 3 colunas */}
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-        {firstRow.map((s, i) => (
-          <div key={i} className="bg-white p-6 shadow rounded text-center">
-            <div className="text-4xl mb-2">{s.icon}</div>
-            <h3 className="font-semibold">{s.nome}</h3>
-            <p>{s.desc}</p>
-          </div>
-        ))}
-      </div>
+        {/* Primeira linha com 3 colunas */}
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+          {firstRow.map((s, i) => (
+            <div key={i} className="bg-white p-6 shadow rounded text-center">
+              <div className="text-4xl mb-2">{s.icon}</div>
+              <h3 className="font-semibold">{s.nome}</h3>
+              {/* <p>{s.desc}</p> */}
+            </div>
+          ))}
+        </div>
 
-      {/* Segunda linha com 2 colunas centralizadas */}
-      <div className="max-w-5xl mx-auto mt-6 flex flex-col md:flex-row justify-center gap-6">
-        {secondRow.map((s, i) => (
-          <div key={i} className="bg-white p-6 shadow rounded text-center w-full md:w-[300px]">
-            <div className="text-4xl mb-2">{s.icon}</div>
-            <h3 className="font-semibold">{s.nome}</h3>
-            <p>{s.desc}</p>
-          </div>
-        ))}
+        {/* Segunda linha com 2 colunas centralizadas */}
+        <div className="max-w-5xl mx-auto mt-6 flex flex-col md:flex-row justify-center gap-6">
+          {secondRow.map((s, i) => (
+            <div key={i} className="bg-white p-6 shadow rounded text-center w-full md:w-[300px]">
+              <div className="text-4xl mb-2">{s.icon}</div>
+              <h3 className="font-semibold">{s.nome}</h3>
+              {/* <p>{s.desc}</p> */}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

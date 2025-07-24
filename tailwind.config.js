@@ -15,9 +15,11 @@ export default {
             option2: "#FF6B6B",
             detail: "#7EA8BE",
           },
-        },
-        fontFamily: {
-          sans: ["Inter", "sans-serif"],
+          fontFamily: {
+            sans: ['ui-sans-serif', 'system-ui'],
+            serif: ['ui-serif', 'Georgia'],
+            mono: ['ui-monospace', 'SFMono-Regular'],
+          },
         },
       },
     },
