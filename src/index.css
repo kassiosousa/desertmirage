@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body, #root { height: 100%; }
+body { margin: 0; }
+
+/* Papel bege com confete sutil */
+.paper-bg{
+  background-color:#ECE9F8;
+  background-image:
+    radial-gradient(1px 1px at 12px 8px, #D7D2EC 1px, transparent 1px),
+    radial-gradient(1px 1px at 4px 20px,  #D7D2EC 1px, transparent 1px),
+    radial-gradient(1px 1px at 20px 16px, #D7D2EC 1px, transparent 1px);
+  background-size:24px 24px;
+}
+
+/* Borda ondulada à direita do painel (scallop) */
+.scallop-right { position: relative; }
+.scallop-right::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -16px;
+  width: 32px;
+  height: 100%;
+  background: theme('colors.paper');
+  -webkit-mask: radial-gradient(16px at 0 16px, #000 99%, transparent 101%) 0 0/32px 32px repeat-y;
+          mask: radial-gradient(16px at 0 16px, #000 99%, transparent 101%) 0 0/32px 32px repeat-y;
+}
+
+/* Botões estilo pílula */
+.btn-pill { @apply rounded-full px-4 py-3 shadow-soft transition transform; }
+.btn-pill:hover { @apply -translate-y-0.5 brightness-105; }
+.btn-pill:focus-visible { outline: 2px dashed rgba(0,0,0,.35); outline-offset: 4px; }
+
+/* Chips circulares */
+.chip { @apply grid h-8 w-8 place-items-center rounded-full bg-black/10; }
+
+/* Créditos em papel */
+.credits { color: rgba(0,0,0,.55); }
